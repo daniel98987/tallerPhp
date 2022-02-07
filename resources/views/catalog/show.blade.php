@@ -13,8 +13,8 @@
 </div>
 
 <div class="row">
-    <div class="col-sm-4">
-        <img src="{{$id['poster']}}" style="height:200px" />
+    <div class="col-sm-4 m-0">
+        <img class="m-4 mt-0 mb-0" src="{{$id['poster']}}" style="height:90%; width:90%;" />
 
     </div>
     <div class="col-sm-8">
@@ -26,7 +26,7 @@
 
                 <div class="col-12">
                     <h3>Año: {{$id['year']}}</h3>
-                    <h3>Año: {{$id['director']}}</h3>
+                    <h3>Director: {{$id['director']}}</h3>
                     <p><b>Resumen: </b> {{$id['synopsis']}}</p>
                     @if ($id['rented'] === false)
                     <p><b>Estado: Pelicula disponible</p>
