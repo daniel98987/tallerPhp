@@ -7,28 +7,28 @@
 <div class="col-xs-6 col-sm-4 col-md-3 text-center">
     <a href="">
         <h4 style="min-height:45px;margin:5px 0 10px 0">
-            {{$id['title']}}
+            {{ $pelicula->title}}
         </h4>
     </a>
 </div>
 
 <div class="row">
     <div class="col-sm-4 m-0">
-        <img class="m-4 mt-0 mb-0" src="{{$id['poster']}}" style="height:90%; width:90%;" />
+        <img class="m-4 mt-0 mb-0" src="{{$pelicula->poster}}" style="height:90%; width:90%;" />
 
     </div>
     <div class="col-sm-8">
         <div class="container">
             <div class="row">
                 <div class="col-12">
-                    <h1>{{$id['title']}}</h1>
+                    <h1>{{$pelicula->title}}</h1>
                 </div>
 
                 <div class="col-12">
-                    <h3>Año: {{$id['year']}}</h3>
-                    <h3>Director: {{$id['director']}}</h3>
-                    <p><b>Resumen: </b> {{$id['synopsis']}}</p>
-                    @if ($id['rented'] === false)
+                    <h3>Año: {{$pelicula->year}}</h3>
+                    <h3>Director: {{$pelicula->director}}</h3>
+                    <p><b>Resumen: </b> {{$pelicula->synopsis}}</p>
+                    @if ($pelicula->rented === false)
                     <p><b>Estado: Pelicula disponible</p>
                     @else
                     <p><b>Estado: Pelicula actualmente alquiliada</p>
@@ -37,7 +37,7 @@
                     <div class="row">
                         <div class="col-3">
 
-                            @if ($id['rented'] === false)
+                            @if ($pelicula->rented === false)
                             <button class="btn btn-primary">Alquilar pelicula</button>
 
                             @else
