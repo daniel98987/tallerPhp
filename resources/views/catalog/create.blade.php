@@ -8,8 +8,9 @@
                 Añadir película
             </div>
             <div class="card-body" style="padding:30px">
-                <form action="/foo/bar" method="POST">
+                <form action="" method="POST">
                     {{ csrf_field() }}
+
 
 
 
@@ -21,8 +22,8 @@
 
                     <div class="form-group">
                         {{-- TODO: Completa el input para el año --}}
-                        <label for="year">Año</label>
-                        <input type="date" name="year" id="year" class="form-control">
+                        <label for="year">Año</labepl>
+                        <input type="number" name="year" id="year" class="form-control">
                     </div>
 
                     <div class="form-group">
@@ -37,7 +38,11 @@
                         <input type="url" name="poster" id="poster" class="form-control">
                     </div>
 
-
+              
+                    <div class="form-group">
+                        <label for="synopsis">Sinopsis</label>
+                        <input type="text" name="synopsis" id="synopsis" class="form-control">
+                    </div>
 
                     <div class="form-group text-center">
                         <button type="submit" class="btn btn-primary" style="padding:8px 100px;margin-top:25px;">

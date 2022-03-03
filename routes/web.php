@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\CatologController;
+use App\Http\Controllers\LoginController;
 
 /*
 |--------------------------------------------------------------------------
@@ -14,20 +15,38 @@ use App\Http\Controllers\CatologController;
 | contains the "web" middleware group. Now create something great!
 |
 */
-Route::get('login', function () {
-    return view('auth.login');
-});
 
-Route::post('logout', function () {
-    return "Saliendo de la sesión";
-});
+Route::get('/',  [HomeController::class, 'getHome'])
+->middleware('auth');
 
-Route::get('/',  [HomeController::class, 'getHome']);
+Route::get('/login', [LoginController::class, 'create'])
+
+    ->name('login.index');
+
+Route::post('/login', [LoginController::class, 'store'])
+    ->name('login.store');
 
 
-Route::get('catalog', [CatologController::class, 'getIndex']);
+ Route::get('/logout', [LoginController::class, 'destroy'])
+    ->middleware('auth')
+    ->name('login.destroy');
 
-Route::get('catalog/show/{id}', [CatologController::class, 'getShow']);
+Route::get('catalog', [CatologController::class, 'getIndex'])
+->middleware('auth');
 
-Route::get('catalog/create',[CatologController::class, 'getCreate']);
-Route::get('catalog/edit/{id}',[CatologController::class, 'getEdit']);
+Route::get('catalog/show/{id}', [CatologController::class, 'getShow'])
+->middleware('auth');
+
+
+Route::get('catalog/create',[CatologController::class, 'getCreate'])
+->middleware('auth');
+Route::post('catalog/create',[CatologController::class, 'postCreate'])
+->middleware('auth');
+
+Route::get('catalog/edit/{id}',[CatologController::class, 'getEdit'])
+->middleware('auth');
+
+
+Route::put('catalog/edit/{id}',[CatologController::class, 'putEdit'])
+->middleware('auth');
+

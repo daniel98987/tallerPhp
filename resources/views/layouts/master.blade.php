@@ -8,10 +8,10 @@
 
 
     <link href="{{ url('/assets/bootstrap/css/bootstrap.min.css') }}" rel="stylesheet">
+    <link href="{{ url('/assets/personal/app.css') }}" rel="stylesheet">
 
     <title>Videoclub</title>
 </head>
-
 <body>
 
     @include('partials.navbar')

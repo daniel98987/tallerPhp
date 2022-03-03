@@ -3,6 +3,7 @@
 namespace Database\Seeders;
 
 use App\Models\Movie;
+use App\Models\User;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
 
@@ -177,17 +178,50 @@ class DatabaseSeeder extends Seeder
 			'synopsis' => 'Un joven hastiado de su gris y monótona vida lucha contra el insomnio. En un viaje en avión conoce a un carismático vendedor de jabón que sostiene una teoría muy particular: el perfeccionismo es cosa de gentes débiles; sólo la autodestrucción hace que la vida merezca la pena. Ambos deciden entonces fundar un club secreto de lucha, donde poder descargar sus frustaciones y su ira, que tendrá un éxito arrollador.'
 		)
 	);
+    private $arrayUsers = array(
+		array(
+			'name' => 'Daniel',
+			'email' => 'dzambrano863@gmail.com', 
+			'password' => 'cristina98', 
+			
+		),
+		array(
+			'name' => 'Yuliana',
+			'email' => 'yuliana863@gmail.com', 
+			'password' => 'yuliana98', 
+			
+		),
+	
+	);
 
     public function run()
     {
         // \App\Models\User::factory(10)->create();
 
-        self::seedCatalog(); 
-
+        //self::seedCatalog(); 
+		self::seedUsers();
         $this->command->info('Tabla catálogo inicializada con datos!');
     }
     
-      function seedCatalog()
+    function seedUsers()
+    {
+  
+        // \App\Models\User::factory(10)->create();
+        DB::table('users')->delete();
+
+        foreach( $this->arrayUsers as $user ) {
+            $p = new User();
+            $p->name = $user['name'];
+
+            $p->email = $user['email'];	
+
+            $p->password =bcrypt( $user['password']);
+
+            $p->save();
+
+      }
+    }
+    function seedCatalog()
     {
   
         // \App\Models\User::factory(10)->create();
