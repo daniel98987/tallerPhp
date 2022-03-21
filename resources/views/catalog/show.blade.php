@@ -1,33 +1,3 @@
-Skip to content
-Search or jump to…
-Pull requests
-Issues
-Marketplace
-Explore
-
-@daniel98987
-daniel98987
-/
-tallerPhp
-Public
-Code
-Issues
-Pull requests
-Actions
-Projects
-Wiki
-Security
-Insights
-Settings
-tallerPhp/resources/views/catalog/show.blade.php
-@hundres272
-hundres272 Cambiando modelo a base de datos
-Latest commit ad3b586 12 days ago
-History
-2 contributors
-@hundres272@daniel98987
-67 lines (49 sloc) 1.92 KB
-
 @extends('layouts.master')
 
 @section('content')
@@ -67,17 +37,40 @@ History
                     <div class="row">
                         <div class="col-3">
 
-                            @if ($pelicula->rented === false)
-                            <button class="btn btn-primary">Alquilar pelicula</button>
+                            @if ($pelicula->rented)
+                            <form action="/catalog/return/{{$pelicula->id}}" method="POST">
+                                {{ csrf_field() }}
+                                {{ method_field('PUT') }}
+                                <button class="btn btn-danger" type="submit">Devolver pelicula</button>
+
+                            </form>
+
 
                             @else
-                            <button class="btn btn-danger">Devolver pelicula</button>
+
+                            <form action="/catalog/rent/{{$pelicula->id}}" method="POST">
+                                {{ csrf_field() }}
+                                {{ method_field('PUT') }}
+                                <button class="btn btn-primary" type="submit">Alquilar pelicula</button>
+
+                            </form>
 
 
                             @endif
                         </div>
                         <div class="col-3">
                             <a class="btn btn-warning" href='{{url("/catalog/edit/$pelicula->id")}}'>Editar pelicula</a>
+                        </div>
+                        <div class="col-3">
+
+                            <form action="/catalog/delete/{{$pelicula->id}}" method="POST">
+                                {{csrf_field()}}
+                                {{method_field('delete')}}
+                                <button class="btn btn-danger" type="submit">Eliminar pelicula</button>
+
+
+                            </form>
+
                         </div>
                         <div class="col-3">
                             <a class="btn btn-secondary" href="{{url('/catalog')}}">Volver al listado</a>

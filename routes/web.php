@@ -16,8 +16,8 @@ use App\Http\Controllers\LoginController;
 |
 */
 
-Route::get('/',  [HomeController::class, 'getHome'])
-->middleware('auth');
+
+
 
 Route::get('/login', [LoginController::class, 'create'])
 
@@ -25,6 +25,32 @@ Route::get('/login', [LoginController::class, 'create'])
 
 Route::post('/login', [LoginController::class, 'store'])
     ->name('login.store');
+
+
+
+
+
+
+
+
+
+
+
+
+    
+
+Route::get('/',  [HomeController::class, 'getHome'])
+->middleware('auth');
+
+
+
+
+
+
+
+
+
+
 
 
  Route::get('/logout', [LoginController::class, 'destroy'])
@@ -38,10 +64,6 @@ Route::get('catalog/show/{id}', [CatologController::class, 'getShow'])
 ->middleware('auth');
 
 
-Route::get('catalog/create',[CatologController::class, 'getCreate'])
-->middleware('auth');
-Route::post('catalog/create',[CatologController::class, 'postCreate'])
-->middleware('auth');
 
 Route::get('catalog/edit/{id}',[CatologController::class, 'getEdit'])
 ->middleware('auth');
@@ -50,3 +72,22 @@ Route::get('catalog/edit/{id}',[CatologController::class, 'getEdit'])
 Route::put('catalog/edit/{id}',[CatologController::class, 'putEdit'])
 ->middleware('auth');
 
+
+Route::get('catalog/create',[CatologController::class, 'getCreate'])
+->middleware('auth');
+Route::post('catalog/create',[CatologController::class, 'postCreate'])
+->middleware('auth');
+
+
+
+Route::put('catalog/rent/{id}', [CatologController::class, 'putRent'])
+->middleware('auth');
+
+Route::put('catalog/return/{id}', [CatologController::class, 'putReturn'])
+->middleware('auth');
+
+
+
+Route::delete('catalog/delete/{id}', [CatologController::class, 'destroy'])
+
+->middleware('auth');

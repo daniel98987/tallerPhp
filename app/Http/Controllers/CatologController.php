@@ -5,25 +5,26 @@ namespace App\Http\Controllers;
 use App\Models\Movie;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class CatologController extends Controller
 {
 
 
 
-  
+
 
     public function getIndex()
     {
-       // $movie= new Movie;
-   		 $movies=  Movie::all();
+        // $movie= new Movie;
+        $movies =  Movie::all();
 
-        return view('catalog.index',array('peliculas'=>$movies));
+        return view('catalog.index', array('peliculas' => $movies));
     }
     public function getShow($id)
     {
-		$movie=  Movie::findOrFail($id+1);		;
-        return view('catalog.show', array('pelicula'=>	$movie));
+        $movie =  Movie::findOrFail($id);;
+        return view('catalog.show', array('pelicula' =>    $movie));
     }
     public function getCreate()
     {
@@ -31,12 +32,13 @@ class CatologController extends Controller
     }
     public function getEdit($id)
     {
-		$movie=  Movie::findOrFail($id);		;
+        $movie =  Movie::findOrFail($id);;
 
-        return view('catalog.edit', array('pelicula'=>	$movie));
+        return view('catalog.edit', array('pelicula' =>    $movie));
     }
- 
-    public function postCreate(Request $req){
+
+    public function postCreate(Request $req)
+    {
 
 
 
@@ -47,19 +49,70 @@ class CatologController extends Controller
         $p->director = $req->director;
         $p->poster = $req->poster;
         $p->rented = false;
-        $p->synopsis =$req->synopsis; 
-        $result=$p->save();
-        if($result){
-    
+        $p->synopsis = $req->synopsis;
+        $result = $p->save();
+        if ($result) {
+            notify()->success('Pelicula creada');
             return redirect()->action([CatologController::class, 'getIndex']);
-
-        }else{
-            return ["result"=>"Data no guardada"];
-
+        } else {
+            return ["result" => "Data no guardada"];
         }
-
     }
-    public function putEdit(Request $req){
+
+    public function putRent(Request $req)
+    {
+
+
+        $p = Movie::find($req->id);
+
+        $p->rented = true;
+
+        $result = $p->save();
+        if ($result) {
+
+            notify()->success('Pelicula alquilada');
+            return redirect()->action(
+                [CatologController::class, 'getShow'],
+                ['id' => $req->id]
+            );
+        } else {
+            return ["result" => "Error"];
+        }
+    }
+    public function putReturn(Request $req)
+    {
+
+
+        $p = Movie::find($req->id);
+
+        $p->rented = false;
+
+        $result = $p->save();
+        if ($result) {
+
+            notify()->success('Pelicula retornada');
+            return redirect()->action(
+                [CatologController::class, 'getShow'],
+                ['id' => $req->id]
+            );
+        } else {
+            return ["result" => "Error"];
+        }
+    }
+    public function destroy($id)
+    {
+
+        DB::delete('delete from movies where id = ?', [$id]);
+
+
+        notify()->success('Pelicula eliminada');
+        return redirect()->action([CatologController::class, 'getIndex']);
+    }
+
+
+    public function putEdit(Request $req)
+    {
+
 
 
 
@@ -70,18 +123,17 @@ class CatologController extends Controller
         $p->director = $req->director;
         $p->poster = $req->poster;
         $p->rented = false;
-        $p->synopsis =$req->synopsis; 
-        $result=$p->save();
-        if($result){
-           
-           
+        $p->synopsis = $req->synopsis;
+        $result = $p->save();
+        if ($result) {
+
+
             return redirect()->action(
-                [CatologController::class, 'getShow'], ['id' => $req->id-1]
+                [CatologController::class, 'getShow'],
+                ['id' => $req->id]
             );
-        }else{
-            return ["result"=>"Error"];
-
+        } else {
+            return ["result" => "Error"];
         }
-
     }
 }

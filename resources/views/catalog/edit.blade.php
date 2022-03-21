@@ -8,9 +8,8 @@
                                 Modificar película
                         </div>
                         <div class="card-body" style="padding:30px">
-                                <form action="" method="POST">
+                                <form action="/catalog/edit" method="POST">
                                         {{ csrf_field() }}
-
                                         {{ method_field('PUT') }}
 
 

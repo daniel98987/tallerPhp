@@ -9,9 +9,10 @@
 
     <link href="{{ url('/assets/bootstrap/css/bootstrap.min.css') }}" rel="stylesheet">
     <link href="{{ url('/assets/personal/app.css') }}" rel="stylesheet">
-
+    @notifyCss
     <title>Videoclub</title>
 </head>
+
 <body>
 
     @include('partials.navbar')
@@ -21,7 +22,9 @@
     </div>
 
     <script src="{{ url('/assets/bootstrap/js/bootstrap.min.js') }}"></script>
-
+    // Laravel 7 or greater
+    <x:notify-messages />
+    @notifyJs
 </body>
 
 </html>

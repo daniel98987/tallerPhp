@@ -19,8 +19,8 @@
 
     <div class="wrapper">
 
-        <div class="logo"> <img src="https://www.freepnglogos.com/uploads/twitter-logo-png/twitter-bird-symbols-png-logo-0.png" alt=""> </div>
-        <div class="text-center mt-4 name"> Twitter </div>
+        <div class="logo"> <img src="https://w7.pngwing.com/pngs/572/603/png-transparent-logo-brand-com-student-creative-slate-text-logo-film.png" alt=""> </div>
+        <div class="text-center mt-4 name"> Peliculas app </div>
         <form class="p-3 mt-3" method="POST" action="">
 
             @csrf
@@ -35,7 +35,6 @@
             <p class=""></p>
             <button type="submit" class="btn mt-3">Login</button>
         </form>
-        <div class="text-center fs-6"> <a href="#">Forget password?</a> or <a href="#">Sign up</a> </div>
 
     </div>
     <script src="{{ url('/assets/bootstrap/js/bootstrap.min.js') }}"></script>
