@@ -23,7 +23,7 @@ class CatologController extends Controller
     }
     public function getShow($id)
     {
-        $movie =  Movie::findOrFail($id);;
+        $movie =  Movie::findOrFail($id);
         return view('catalog.show', array('pelicula' =>    $movie));
     }
     public function getCreate()
@@ -122,7 +122,6 @@ class CatologController extends Controller
         $p->year =  ($req->year);
         $p->director = $req->director;
         $p->poster = $req->poster;
-        $p->rented = false;
         $p->synopsis = $req->synopsis;
         $result = $p->save();
         if ($result) {
